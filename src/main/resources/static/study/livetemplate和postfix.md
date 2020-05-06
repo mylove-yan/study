@@ -10,5 +10,8 @@ ctrl + shift + A ,输入 live templete<br>
 ![markdown文件关联](../images/定义默认编写的code.png)<br>
 **3.常用的live templete**
 ![markdown文件关联](../images/常用live templete.png)<br>
+**4.调出 postfix**<br>
+ctrl + shift + A ,输入 postfix <br>
+![markdown文件关联](../images/postfix页面.png)<br>
 
 
