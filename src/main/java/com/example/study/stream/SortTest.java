@@ -18,9 +18,12 @@ public class SortTest {
         }
     }
 
+    /**
+     * 空值进行排序时，如果不做处理会报错,
+     */
     public static void withSortOperation(){
         List<Student> list = getStudentList();
-        list = list.stream().sorted(Comparator.comparing(Student::getGrade).reversed()).collect(Collectors.toList());
+        list = list.stream().sorted(Comparator.comparing(Student::getGrade,Comparator.nullsFirst(Double::compareTo)).reversed()).collect(Collectors.toList());
         for (Student s : list) {
             System.out.println("名字：" + s.getName() + ",年龄：" + s.getAge() + ",成绩：" + s.getGrade());
         }
@@ -32,11 +35,15 @@ public class SortTest {
         Student b = new Student("TEST2", 12, 13.36);
         Student c = new Student("TEST3", 13, 17.36);
         Student d = new Student("TEST4", 14, 15.36);
+        Student e = new Student("TEST5", 19, null);
+        Student f = new Student("TEST5", 11, null);
         List<Student> list = new ArrayList<>();
         list.add(b);
         list.add(a);
         list.add(d);
         list.add(c);
+        list.add(e);
+        list.add(f);
         return list;
     }
 

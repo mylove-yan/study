@@ -16,6 +16,10 @@ import java.text.DecimalFormat;
  */
 public class DoubleFormat {
     public static void main(String[] args) {
+
+    }
+
+    public void doubleFormat(){
         double num=13.154215;
         DecimalFormat df1 = new DecimalFormat("0.00");
         String str = df1.format(num);
@@ -25,6 +29,13 @@ public class DoubleFormat {
         //%.2f %. 表示 小数点前任意位数 2 表示两位小数 格式后的结果为f 表示浮点型
         String result = String.format("%.2f", num);
         System.out.println(result);
+    }
+
+    public void bigDecimalPrecision(){
+        Double a = 1.15;
+        Double b = 0.09;
+
+
     }
 
 }
