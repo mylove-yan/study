@@ -1,5 +1,5 @@
-## BeanUtils.copyProperties的使用(深拷贝，浅拷贝)
-> 文章原创 https://blog.csdn.net/enthan809882/article/details/104956537/ 
+## BeanUtils.copyProperties的使用(深拷贝，浅拷贝) 
+> 文章原创地址 https://blog.csdn.net/enthan809882/article/details/104956537/ 
 
 ### 使用场景
 开发中经常遇到，把父类的属性拷贝到子类中。通常有2种方法：
