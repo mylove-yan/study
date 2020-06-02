@@ -1,5 +1,7 @@
 package com.example.study.stream;
 
+import java.math.BigDecimal;
+
 public class Student {
     /**
     *姓名
@@ -45,5 +47,22 @@ public class Student {
 
     public void setGrade(Double grade) {
         this.grade = grade;
+    }
+
+    public static int compareAge(Student o1, Student o2) {
+
+        if((o1.getAge() == null || o1.getAge().equals("--")) && (o2.getAge() == null || o2.getAge().equals("--"))){
+            return 0;
+        }
+
+        if(o1.getAge() == null || o1.getAge().equals("--")){
+            return 1;
+        }
+
+        if(o2.getAge() == null || o2.getAge().equals("--")){
+            return -1;
+        }
+
+        return -new BigDecimal(o1.getAge()).compareTo(new BigDecimal(o2.getAge()));
     }
 }
