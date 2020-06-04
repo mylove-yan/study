@@ -30,7 +30,7 @@
 ### 对象方法引用
 具体事例 com.example.study.method.ObjectExample
 ### 构造方法引用
-具体事例 com.example.study.method.
+具体事例 com.example.study.method.Example5
 
 
 
