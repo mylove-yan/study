@@ -120,3 +120,69 @@ public interface Func extends NonFunc{
 }
 ```
 实现的测试类：
+```java
+public class Test implements Func{
+    @Override
+    void go(){
+    
+    };
+    @Override
+    void run(){
+        
+    };
+    @Override
+    void foo(){
+    };
+}
+```
+函数式接口的一大特性就是可以被lambda表达式和函数引用表达式代替。也就是说声明这样的接口，是可以灵活的以方法来传参。
+
+另一个大的话题是针对上文的***逻辑上的方法***。所谓逻辑上，就是说当你出现函数式接口多重继承其他接口时，如果继承的多个接口有相同的方法签名，那么也是OK的。而这种相同签名的方法，也包括了泛型的情况，以下的声明中的Z接口，都是函数式接口。
+
+```java
+interface X {
+    int m(Iterable<String> arg);
+}
+
+interface Y {
+    int m(Iterable<String> arg);
+}
+
+interface Z extends X, Y {
+
+}
+```
+但是要注意的是，这种泛型的支持，是因为函数式接口的官方声明规范里要求类型可替换和子签名，不是因为泛型擦除。
+
+最后，Java8里关于函数式接口的包是java.util.function，里面全部是函数式接口。主要包含几大类：Function、Predicate、Supplier、Consumer和*Operator（没有Operator接口，只有类似BinaryOperator这样的接口）。后面依次展开详细说明一下。
+
+### Function
+
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param t the function argument
+     * @return the function result
+     */
+    R apply(T t);
+}
+```
+函数意为将参数T传递给一个函数，返回R。即$R=Function(T)$
+
+其默认实现了3个default方法，分别是compose、andThen和identity，对应的函数表达为：compose对应$V=Function(ParamFunction(T))$，体现嵌套关系；andThen对应$V=ParamFunction(Function(T))$，转换了嵌套的顺序；还有identity对应了一个传递自身的函数调用对应$Function(T)=T$。从这里看出来，compose和andThen对于两个函数f和g来说，f.compose(g)等价于g.andThen(f)。
+```java
+public class TestFunction {
+    public static void main(String[] args) {
+        Function<Integer,Integer> incr1 = x->x+1;
+        Function<Integer,Integer> multiply = x-> x*2;
+        int x = 2;
+        System.out.println("f(x)=x+1,when x="+x+",f(x)="+incr1.apply(x));
+        System.out.println("f(x)=x+1,g(x)=2x,when x="+x+",f(g(x))="+incr1.compose(multiply).apply(x));
+        System.out.println("f(x)=x+1,g(x)=2x,when x="+x+",g(f(x))="+incr1.andThen(multiply).apply(x));
+    }
+}
+```
