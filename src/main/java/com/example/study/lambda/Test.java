@@ -9,6 +9,7 @@ package com.example.study.lambda;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 这里请补充该类型的简述说明
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        List<Person> roster = getPersonList();
+        JDKFunction();
 
     }
     public static List<Person> getPersonList(){
@@ -110,6 +111,55 @@ public class Test {
         }
     }
 
+    /**
+     * printPersons 的第二个参数是 CheckPerson 接口类型的，
+     * 在本例子中，调用方法 printPersons 时，此参数是一个匿名类的实例。
+     * 在这个匿名类中，规定了筛选应用会员的条件，即符合美国义务兵役制，
+     * 制度的具体内容就是应用会员是男性且年龄介于 18 岁至 25 岁之间。
+     * 我们发现，这个方法的调用，有效地减少了代码量，因为我们不再需要在独立的实现类中定义筛选会员的条件。
+     * 但是，这并不完美，接口 CheckPerson 的定义非常简单，只有唯一一个抽象方法 test，我们的定义了该接口的匿名实现类，
+     * 实现了抽象方法 test，并创建了匿名类的实例，有关匿名类的代码看起来太多了，因为它仅仅只需实现一个抽象方法 test。
+     * 下一个例子，我们正式使用 Lambda 表达式代替匿名类，你会看到更加简洁和可读性更好的代码
+     */
+    public static void AnonymousInnerClass(){
+        List<Person> roster = getPersonList();
+        printPersons(roster, new CheckPerson() {
+            @Override
+            public boolean test(Person p) {
+                return p.getGender() == Person.Sex.MALE &&
+                        p.getAge() >= 18 && p.getAge() <= 25;
+            }
+        });
 
+    }
 
+    /**
+     * Lambda表达式方法
+     */
+    public static void Lambda(){
+        List<Person> roster = getPersonList();
+        printPersons(roster,(Person p) -> p.getGender() == Person.Sex.MALE && p.getAge() >= 18 && p.getAge() <= 25);
+        printPersons(roster, p -> p.getGender() == Person.Sex.MALE && p.getAge() >= 18 && p.getAge() <= 25);
+    }
+
+    /**
+     * 使用jdk自带函数
+     */
+    public static void JDKFunction(){
+        List<Person> roster = getPersonList();
+        printPersonsWithPredicate(roster, p -> p.getGender() == Person.Sex.MALE && p.getAge() >= 18 && p.getAge() <= 25);
+    }
+
+    /**
+     *
+     * @param roster
+     * @param tester
+     */
+    public static void printPersonsWithPredicate(List<Person> roster, Predicate<Person> tester) {
+        for (Person p : roster) {
+            if (tester.test(p)) {
+                p.printPerson();
+            }
+        }
+    }
 }
