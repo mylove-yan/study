@@ -94,15 +94,26 @@ public class SortTest {
         });
     }
 
+    /**
+     * 使用jdk 新增的list 默认排序
+     */
+    public static void withListSort(){
+        ArrayList<Student> list = getStudentList();
+        list.sort(Student::compareAge);
+        list.forEach((value)->{
+            System.out.println("名字：" + value.getName() + ",年龄：" + value.getAge() + ",成绩：" + value.getGrade());
+        });
+    }
 
-    public static List<Student> getStudentList(){
+
+    public static ArrayList<Student> getStudentList(){
         Student a = new Student("TEST1", 16, 19.36);
         Student b = new Student("TEST2", 19, 13.36);
         Student c = new Student("TEST3", 13, 17.36);
         Student d = new Student("TEST4", 21, 15.36);
         Student e = new Student("TEST5", 19, null);
         Student f = new Student("TEST6", 9, null);
-        List<Student> list = new ArrayList<>();
+        ArrayList<Student> list = new ArrayList<>();
         list.add(a);
         list.add(b);
         list.add(c);
