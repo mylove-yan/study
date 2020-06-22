@@ -1,3 +1,6 @@
+> java中double类型数据加减操作精度丢失问题及解决方法
+>> https://blog.csdn.net/yacolspace/article/details/78287394
+
 ## BigDecimal的用法详解
 ### BigDecimal有四种构造方法：
 * BigDecimal(int)       创建一个具有参数所指定整数值的对象。

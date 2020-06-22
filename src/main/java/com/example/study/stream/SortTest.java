@@ -98,6 +98,8 @@ public class SortTest {
      * 使用jdk 新增的list 默认排序
      */
     public static void withListSort(){
+        List<Student> another = getStudentList();
+        another.sort(Student::compareAge);
         ArrayList<Student> list = getStudentList();
         list.sort(Student::compareAge);
         list.forEach((value)->{
