@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class SortTest {
 
     public static void main(String[] args) {
-        withStaticComparator();
+        withLambdaComparator();
     }
 
     public static void withNoOperation() {

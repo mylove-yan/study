@@ -16,6 +16,13 @@ import java.math.BigDecimal;
  */
 public class BigDecimalUtil {
 
+
+    public static void main(String[] args) throws IllegalAccessException {
+        Double a = null;
+        Double b = 1.0;
+        System.out.println(mul(a,b));
+    }
+
     // 除法运算默认精度
     private static final int DEF_DIV_SCALE = 10;
 
